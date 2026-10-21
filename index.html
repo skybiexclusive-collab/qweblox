@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="tr" class="octane-dark">
 <head>
-    <meta name="qweblox-viewer" data-id="1" data-name="Owner" data-displayname="Owner" data-staff="1">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home - QweBlox</title>
+    <title>QweBlox</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,6 +18,7 @@
             --text-main: #ffffff;
             --text-sub: #bdbebe;
             --primary-accent: #00a2ff;
+            --admin-red: #d12027;
         }
 
         * {
@@ -34,7 +34,95 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow-x: hidden;
+        }
+
+        /* --- AUTH EKRANI (GİRİŞ & KAYIT) --- */
+        #auth-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .auth-card {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        .auth-logo {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--text-main);
+            margin-bottom: 20px;
+        }
+
+        .auth-logo span { color: var(--primary-accent); }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 10px;
+            background: none;
+            border: none;
+            color: var(--text-sub);
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .auth-tab.active {
+            color: var(--primary-accent);
+            border-bottom: 2px solid var(--primary-accent);
+        }
+
+        .auth-input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            background: #111;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: #fff;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary-accent);
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .auth-error {
+            color: #ff4d4d;
+            font-size: 13px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* --- ANA EKRAN (DASHBOARD) --- */
+        #main-app {
+            display: none;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         .rbx-header {
@@ -63,12 +151,9 @@
             font-size: 20px;
             color: var(--text-main);
             text-decoration: none;
-            letter-spacing: 0.5px;
         }
 
-        .qweblox-logo span {
-            color: var(--primary-accent);
-        }
+        .qweblox-logo span { color: var(--primary-accent); }
 
         .nav-links {
             display: flex;
@@ -87,31 +172,7 @@
             cursor: pointer;
         }
 
-        .nav-btn:hover, .nav-links a:hover {
-            color: var(--primary-accent);
-        }
-
-        .header-search {
-            flex: 0 1 400px;
-            margin: 0 20px;
-        }
-
-        .search-box {
-            position: relative;
-            width: 100%;
-        }
-
-        .search-box input {
-            width: 100%;
-            height: 32px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 4px;
-            padding: 0 35px 0 12px;
-            color: var(--text-main);
-            font-size: 13px;
-            outline: none;
-        }
+        .nav-btn:hover, .nav-links a:hover { color: var(--primary-accent); }
 
         .header-right {
             display: flex;
@@ -141,13 +202,21 @@
             transform: rotate(45deg);
         }
 
-        .admin-tag {
-            background-color: #d12027;
+        .role-tag {
+            background-color: var(--admin-red);
             color: #fff;
             padding: 3px 8px;
             font-size: 11px;
             font-weight: 800;
             border-radius: 4px;
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: var(--text-sub);
+            cursor: pointer;
+            font-size: 13px;
         }
 
         .qweblox-nav-offset {
@@ -160,6 +229,7 @@
             width: 100%;
         }
 
+        /* Ana Ekrandaki Kullanıcı & Oyun Oluşturma Kartı */
         .user-welcome-card {
             background-color: var(--surface-color);
             border: 1px solid var(--border-color);
@@ -169,6 +239,8 @@
             align-items: center;
             justify-content: space-between;
             margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .user-welcome-info {
@@ -178,26 +250,40 @@
         }
 
         .avatar-thumb-box {
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             background: #111;
             border: 2px solid var(--border-color);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
+            font-size: 28px;
         }
 
         .user-names h2 {
             color: var(--text-main);
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 700;
         }
 
         .user-names p {
             font-size: 13px;
             color: var(--text-sub);
+        }
+
+        .create-game-btn {
+            background: var(--primary-accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
         }
 
         .section-title {
@@ -220,13 +306,9 @@
             border-radius: 6px;
             overflow: hidden;
             transition: transform 0.15s;
-            text-decoration: none;
-            color: inherit;
         }
 
-        .game-card:hover {
-            transform: translateY(-4px);
-        }
+        .game-card:hover { transform: translateY(-4px); }
 
         .game-thumb {
             width: 100%;
@@ -241,9 +323,7 @@
             padding: 10px;
         }
 
-        .game-details {
-            padding: 10px;
-        }
+        .game-details { padding: 10px; }
 
         .game-title {
             font-size: 14px;
@@ -260,7 +340,7 @@
             margin-top: 3px;
         }
 
-        /* Modal (Create Pop-up) */
+        /* Modal (Oyun Oluşturma Penceresi) */
         .modal {
             display: none;
             position: fixed;
@@ -283,19 +363,9 @@
             max-width: 450px;
         }
 
-        .modal-content h3 {
-            color: var(--text-main);
-            margin-bottom: 16px;
-        }
-
-        .modal-content label {
-            display: block;
-            font-size: 13px;
-            margin-bottom: 6px;
-            color: var(--text-sub);
-        }
-
-        .modal-content input, .modal-content select {
+        .modal-content h3 { color: var(--text-main); margin-bottom: 16px; }
+        .modal-content label { display: block; font-size: 13px; margin-bottom: 6px; color: var(--text-sub); }
+        .modal-content input {
             width: 100%;
             padding: 10px;
             margin-bottom: 16px;
@@ -306,22 +376,7 @@
             outline: none;
         }
 
-        .btn-group {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-        }
-
-        .btn-primary {
-            background: var(--primary-accent);
-            border: none;
-            color: #fff;
-            padding: 8px 16px;
-            border-radius: 4px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
+        .btn-group { display: flex; justify-content: flex-end; gap: 10px; }
         .btn-cancel {
             background: var(--card-color);
             border: none;
@@ -343,75 +398,166 @@
 </head>
 <body>
 
-    <div id="header" class="rbx-header">
-        <div class="header-left">
-            <a class="qweblox-logo" href="/">Qwe<span>Blox</span></a>
-            <ul class="nav-links">
-                <li><a href="/">Discover</a></li>
-                <li><a href="#">Avatar Shop</a></li>
-                <li><button class="nav-btn" onclick="openCreateModal()">Create</button></li>
-            </ul>
-        </div>
-
-        <div class="header-right">
-            <div class="currency-stat">
-                <span class="robux-icon"></span>
-                <span>999,999,999</span>
+    <!-- 1. GİRİŞ VE KAYIT EKRANI -->
+    <div id="auth-screen">
+        <div class="auth-card">
+            <div class="auth-logo">Qwe<span>Blox</span></div>
+            
+            <div class="auth-tabs">
+                <button class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')">Giriş Yap</button>
+                <button class="auth-tab" id="tab-register" onclick="switchAuthTab('register')">Kayıt Ol</button>
             </div>
-            <span class="admin-tag">OWNER</span>
+
+            <input type="text" id="auth-username" class="auth-input" placeholder="Kullanıcı Adı" autocomplete="off">
+            <input type="password" id="auth-password" class="auth-input" placeholder="Şifre">
+            
+            <button class="auth-btn" id="auth-submit-btn" onclick="handleAuthSubmit()">Giriş Yap</button>
+            <div class="auth-error" id="auth-error-msg"></div>
         </div>
     </div>
 
-    <main class="qweblox-nav-offset">
-        <div class="user-welcome-card">
-            <div class="user-welcome-info">
-                <div class="avatar-thumb-box">👤</div>
-                <div class="user-names">
-                    <h2>Owner <span style="font-size: 16px; color: var(--primary-accent);">✓</span></h2>
-                    <p>@admin &bull; QweBlox Kurucusu</p>
+    <!-- 2. ANA EKRAN (DASHBOARD) -->
+    <div id="main-app">
+        <div id="header" class="rbx-header">
+            <div class="header-left">
+                <a class="qweblox-logo" href="/">Qwe<span>Blox</span></a>
+                <ul class="nav-links">
+                    <li><a href="/">Discover</a></li>
+                    <li><a href="#">Avatar Shop</a></li>
+                    <li><button class="nav-btn" onclick="openCreateModal()">Create</button></li>
+                </ul>
+            </div>
+
+            <div class="header-right">
+                <div class="currency-stat">
+                    <span class="robux-icon"></span>
+                    <span id="user-robux-display">0</span>
+                </div>
+                <span class="role-tag" id="user-role-display">MEMBER</span>
+                <button class="logout-btn" onclick="handleLogout()">Çıkış</button>
+            </div>
+        </div>
+
+        <main class="qweblox-nav-offset">
+            <div class="user-welcome-card">
+                <div class="user-welcome-info">
+                    <div class="avatar-thumb-box">👤</div>
+                    <div class="user-names">
+                        <h2><span id="user-name-display">Kullanıcı</span> <span style="font-size: 16px; color: var(--primary-accent);">✓</span></h2>
+                        <p id="user-tag-display">@user &bull; QweBlox</p>
+                    </div>
+                </div>
+                <div>
+                    <!-- Ana ekrandan oyun oluşturma butonu -->
+                    <button class="create-game-btn" onclick="openCreateModal()">+ Oyun Oluştur</button>
                 </div>
             </div>
-            <div>
-                <button class="btn-primary" onclick="openCreateModal()">+ Yeni Oyun Oluştur</button>
+
+            <div class="section-title">
+                <span>Discover Games</span>
             </div>
-        </div>
 
-        <div class="section-title">
-            <span>Discover Games</span>
-        </div>
+            <div class="games-grid" id="gamesContainer">
+                <!-- Oyunlar buraya listelenecek -->
+            </div>
+        </main>
 
-        <div class="games-grid" id="gamesContainer">
-            <!-- Oyunlar API'den dinamik olarak buraya gelecek -->
-        </div>
-    </main>
-
-    <!-- Create Game Modal Penceresi -->
-    <div class="modal" id="createModal">
-        <div class="modal-content">
-            <h3>QweBlox - Yeni Oyun / Harita Yükle</h3>
-            <form action="/api/create-game" method="POST">
+        <!-- Oyun Oluşturma Penceresi (Modal) -->
+        <div class="modal" id="createModal">
+            <div class="modal-content">
+                <h3>QweBlox - Yeni Oyun Oluştur</h3>
                 <label>Oyun Başlığı:</label>
-                <input type="text" name="title" placeholder="Örn: Sword Fight on the Heights" required>
-
-                <label>Geliştirici / Sahip:</label>
-                <input type="text" name="creator" value="Owner" readonly>
+                <input type="text" id="new-game-title" placeholder="Örn: Crossroads Remastered">
 
                 <label>Harita Dosyası (.rbxl):</label>
-                <input type="file" accept=".rbxl" style="padding: 6px;">
+                <input type="file" accept=".rbxl">
 
                 <div class="btn-group">
                     <button type="button" class="btn-cancel" onclick="closeCreateModal()">İptal</button>
-                    <button type="submit" class="btn-primary">Yayınla</button>
+                    <button type="button" class="create-game-btn" onclick="submitCreateGame()">Yayınla</button>
                 </div>
-            </form>
+            </div>
         </div>
+
+        <footer>
+            <p>© 2026 QweBlox. Not affiliated with the Roblox Corporation.</p>
+        </footer>
     </div>
 
-    <footer>
-        <p>© 2026 QweBlox. Not affiliated with the Roblox Corporation.</p>
-    </footer>
-
     <script>
+        let currentAuthMode = 'login';
+        let currentUser = null;
+
+        function switchAuthTab(mode) {
+            currentAuthMode = mode;
+            document.getElementById('tab-login').className = mode === 'login' ? 'auth-tab active' : 'auth-tab';
+            document.getElementById('tab-register').className = mode === 'register' ? 'auth-tab active' : 'auth-tab';
+            document.getElementById('auth-submit-btn').innerText = mode === 'login' ? 'Giriş Yap' : 'Hesap Oluştur';
+            document.getElementById('auth-error-msg').style.display = 'none';
+        }
+
+        async function handleAuthSubmit() {
+            const username = document.getElementById('auth-username').value.trim();
+            const password = document.getElementById('auth-password').value.trim();
+            const errorDiv = document.getElementById('auth-error-msg');
+
+            if (!username || !password) {
+                errorDiv.innerText = "Lütfen tüm alanları doldurun.";
+                errorDiv.style.display = 'block';
+                return;
+            }
+
+            const endpoint = currentAuthMode === 'login' ? '/api/login' : '/api/register';
+
+            try {
+                const res = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await res.json();
+
+                if (!data.success) {
+                    errorDiv.innerText = data.message;
+                    errorDiv.style.display = 'block';
+                    return;
+                }
+
+                // Giriş başarılı
+                currentUser = data.user;
+                localStorage.setItem('qweblox_user', JSON.stringify(currentUser));
+                initMainScreen();
+            } catch (err) {
+                errorDiv.innerText = "Sunucuya bağlanılamadı.";
+                errorDiv.style.display = 'block';
+            }
+        }
+
+        function initMainScreen() {
+            document.getElementById('auth-screen').style.display = 'none';
+            document.getElementById('main-app').style.display = 'flex';
+
+            document.getElementById('user-name-display').innerText = currentUser.username;
+            document.getElementById('user-tag-display').innerText = `@${currentUser.username.toLowerCase()} • QweBlox ${currentUser.role}`;
+            document.getElementById('user-robux-display').innerText = Number(currentUser.robux).toLocaleString();
+            
+            const roleBadge = document.getElementById('user-role-display');
+            roleBadge.innerText = currentUser.role;
+            if (currentUser.role !== 'OWNER') {
+                roleBadge.style.backgroundColor = '#555';
+            }
+
+            loadGames();
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('qweblox_user');
+            currentUser = null;
+            document.getElementById('main-app').style.display = 'none';
+            document.getElementById('auth-screen').style.display = 'flex';
+        }
+
         function openCreateModal() {
             document.getElementById('createModal').style.display = 'flex';
         }
@@ -420,32 +566,55 @@
             document.getElementById('createModal').style.display = 'none';
         }
 
-        // Oyunları API'den çekip listeleme
-        async function loadGames() {
-            try {
-                const res = await fetch('/api/games');
-                const games = await res.json();
-                const container = document.getElementById('gamesContainer');
-                container.innerHTML = '';
+        async function submitCreateGame() {
+            const title = document.getElementById('new-game-title').value.trim();
+            if (!title) return alert("Lütfen bir oyun adı girin!");
 
-                games.forEach(game => {
-                    const card = document.createElement('div');
-                    card.className = 'game-card';
-                    card.innerHTML = `
-                        <div class="game-thumb">${game.thumb}</div>
-                        <div class="game-details">
-                            <div class="game-title">${game.title}</div>
-                            <div class="game-creator">by ${game.creator}</div>
-                        </div>
-                    `;
-                    container.appendChild(card);
-                });
-            } catch (err) {
-                console.error("Oyunlar yüklenirken hata:", err);
+            const res = await fetch('/api/create-game', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    title: title,
+                    creator: currentUser ? currentUser.username : "Owner"
+                })
+            });
+
+            const data = await res.json();
+            if (data.success) {
+                document.getElementById('new-game-title').value = '';
+                closeCreateModal();
+                loadGames();
             }
         }
 
-        loadGames();
+        async function loadGames() {
+            const res = await fetch('/api/games');
+            const games = await res.json();
+            const container = document.getElementById('gamesContainer');
+            container.innerHTML = '';
+
+            games.forEach(game => {
+                const card = document.createElement('div');
+                card.className = 'game-card';
+                card.innerHTML = `
+                    <div class="game-thumb">${game.thumb}</div>
+                    <div class="game-details">
+                        <div class="game-title">${game.title}</div>
+                        <div class="game-creator">by ${game.creator}</div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Sayfa yenilendiğinde oturumu hatırla
+        window.onload = () => {
+            const saved = localStorage.getItem('qweblox_user');
+            if (saved) {
+                currentUser = JSON.parse(saved);
+                initMainScreen();
+            }
+        };
     </script>
 </body>
 </html>
