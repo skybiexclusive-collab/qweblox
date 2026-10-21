@@ -1,8 +1,12 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.static('public'));
+// Ana sayfaya girildiğinde doğrudan ana dizindeki index.html dosyasını açar
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 // Roblox İstemcisi Doğrulama Uç Noktası
 app.get('/Login/Negotiate.ashx', (req, res) => {
@@ -16,7 +20,7 @@ app.get('/Asset/CharacterFetch.ashx', (req, res) => {
     res.send('');
 });
 
-// Oyuna Katılma Betiği (Join Script)
+// Oyuna Bağlanma Betiği (Join Script)
 app.get('/game/Join.ashx', (req, res) => {
     const luaScript = `
         local client = game:GetService("NetworkClient")
@@ -29,5 +33,5 @@ app.get('/game/Join.ashx', (req, res) => {
 });
 
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`QweBlox sunucusu çalışıyor: Port ${PORT}`);
+    console.log(`QweBlox API aktif: Port ${PORT}`);
 });
