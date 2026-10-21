@@ -58,24 +58,6 @@
             gap: 20px;
         }
 
-        .rbx-nav-collapse {
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 4px;
-            width: 20px;
-            height: 20px;
-        }
-
-        .rbx-nav-collapse span {
-            display: block;
-            height: 2px;
-            width: 100%;
-            background-color: var(--text-main);
-            border-radius: 2px;
-        }
-
         .qweblox-logo {
             font-weight: 900;
             font-size: 20px;
@@ -95,11 +77,18 @@
             list-style: none;
         }
 
-        .nav-links a {
+        .nav-links a, .nav-btn {
             color: var(--text-main);
             text-decoration: none;
             font-weight: 600;
             font-size: 14px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover, .nav-links a:hover {
+            color: var(--primary-accent);
         }
 
         .header-search {
@@ -122,17 +111,6 @@
             color: var(--text-main);
             font-size: 13px;
             outline: none;
-        }
-
-        .search-btn {
-            position: absolute;
-            right: 8px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: var(--text-sub);
-            cursor: pointer;
         }
 
         .header-right {
@@ -170,7 +148,6 @@
             font-size: 11px;
             font-weight: 800;
             border-radius: 4px;
-            letter-spacing: 1px;
         }
 
         .qweblox-nav-offset {
@@ -216,9 +193,6 @@
             color: var(--text-main);
             font-size: 22px;
             font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .user-names p {
@@ -245,15 +219,13 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 6px;
             overflow: hidden;
-            transition: transform 0.15s, border-color 0.15s;
-            cursor: pointer;
+            transition: transform 0.15s;
             text-decoration: none;
             color: inherit;
         }
 
         .game-card:hover {
             transform: translateY(-4px);
-            border-color: var(--border-color);
         }
 
         .game-thumb {
@@ -265,6 +237,8 @@
             justify-content: center;
             color: #777;
             font-weight: 600;
+            text-align: center;
+            padding: 10px;
         }
 
         .game-details {
@@ -286,38 +260,82 @@
             margin-top: 3px;
         }
 
+        /* Modal (Create Pop-up) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .modal-content {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 24px;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .modal-content h3 {
+            color: var(--text-main);
+            margin-bottom: 16px;
+        }
+
+        .modal-content label {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 6px;
+            color: var(--text-sub);
+        }
+
+        .modal-content input, .modal-content select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            background: #111;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: #fff;
+            outline: none;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: var(--primary-accent);
+            border: none;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-cancel {
+            background: var(--card-color);
+            border: none;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
         footer {
             background: transparent;
             padding: 30px 0;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .footer-container {
-            max-width: 970px;
-            margin: 0 auto;
             text-align: center;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 32px;
-            list-style: none;
-            margin-bottom: 16px;
-        }
-
-        .footer-links a {
-            color: var(--text-sub);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .footer-links a:hover {
-            color: var(--text-main);
-        }
-
-        .disclaimer {
             font-size: 11px;
             color: #606162;
         }
@@ -325,28 +343,14 @@
 </head>
 <body>
 
-    <div id="header" class="rbx-header" role="navigation">
+    <div id="header" class="rbx-header">
         <div class="header-left">
-            <div id="header-menu-icon" class="rbx-nav-collapse">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <a class="qweblox-logo" href="/">
-                Qwe<span>Blox</span>
-            </a>
+            <a class="qweblox-logo" href="/">Qwe<span>Blox</span></a>
             <ul class="nav-links">
-                <li><a href="/games">Discover</a></li>
-                <li><a href="/catalog">Avatar Shop</a></li>
-                <li><a href="/develop">Create</a></li>
+                <li><a href="/">Discover</a></li>
+                <li><a href="#">Avatar Shop</a></li>
+                <li><button class="nav-btn" onclick="openCreateModal()">Create</button></li>
             </ul>
-        </div>
-
-        <div class="header-search">
-            <div class="search-box">
-                <input id="navbar-search-input" placeholder="Search" autocomplete="off" spellcheck="false" />
-                <button class="search-btn" type="button">🔍</button>
-            </div>
         </div>
 
         <div class="header-right">
@@ -368,9 +372,7 @@
                 </div>
             </div>
             <div>
-                <button style="background: var(--card-color); border: 1px solid var(--border-color); color: #fff; padding: 8px 16px; border-radius: 4px; font-weight: 600; cursor: pointer;">
-                    UGC / Eşya Yükle
-                </button>
+                <button class="btn-primary" onclick="openCreateModal()">+ Yeni Oyun Oluştur</button>
             </div>
         </div>
 
@@ -378,52 +380,72 @@
             <span>Discover Games</span>
         </div>
 
-        <div class="games-grid">
-            <div class="game-card">
-                <div class="game-thumb">Crossroads</div>
-                <div class="game-details">
-                    <div class="game-title">Classic Crossroads</div>
-                    <div class="game-creator">by QweBlox</div>
-                </div>
-            </div>
-
-            <div class="game-card">
-                <div class="game-thumb">Chaos Canyon</div>
-                <div class="game-details">
-                    <div class="game-title">Chaos Canyon</div>
-                    <div class="game-creator">by QweBlox</div>
-                </div>
-            </div>
-
-            <div class="game-card">
-                <div class="game-thumb">Happy Home</div>
-                <div class="game-details">
-                    <div class="game-title">Happy Home in Robloxia</div>
-                    <div class="game-creator">by QweBlox</div>
-                </div>
-            </div>
-
-            <div class="game-card">
-                <div class="game-thumb">Doomspire</div>
-                <div class="game-details">
-                    <div class="game-title">Doomspire Brickbattle</div>
-                    <div class="game-creator">by QweBlox</div>
-                </div>
-            </div>
+        <div class="games-grid" id="gamesContainer">
+            <!-- Oyunlar API'den dinamik olarak buraya gelecek -->
         </div>
     </main>
 
-    <footer>
-        <div class="footer-container">
-            <ul class="footer-links">
-                <li><a href="/discord">Discord</a></li>
-                <li><a href="/contact">Contact</a></li>
-                <li><a href="/privacy">Privacy</a></li>
-                <li><a href="/downloads">Download Client</a></li>
-            </ul>
-            <p class="disclaimer">© 2026 QweBlox. Not affiliated with the Roblox Corporation.</p>
+    <!-- Create Game Modal Penceresi -->
+    <div class="modal" id="createModal">
+        <div class="modal-content">
+            <h3>QweBlox - Yeni Oyun / Harita Yükle</h3>
+            <form action="/api/create-game" method="POST">
+                <label>Oyun Başlığı:</label>
+                <input type="text" name="title" placeholder="Örn: Sword Fight on the Heights" required>
+
+                <label>Geliştirici / Sahip:</label>
+                <input type="text" name="creator" value="Owner" readonly>
+
+                <label>Harita Dosyası (.rbxl):</label>
+                <input type="file" accept=".rbxl" style="padding: 6px;">
+
+                <div class="btn-group">
+                    <button type="button" class="btn-cancel" onclick="closeCreateModal()">İptal</button>
+                    <button type="submit" class="btn-primary">Yayınla</button>
+                </div>
+            </form>
         </div>
+    </div>
+
+    <footer>
+        <p>© 2026 QweBlox. Not affiliated with the Roblox Corporation.</p>
     </footer>
 
+    <script>
+        function openCreateModal() {
+            document.getElementById('createModal').style.display = 'flex';
+        }
+
+        function closeCreateModal() {
+            document.getElementById('createModal').style.display = 'none';
+        }
+
+        // Oyunları API'den çekip listeleme
+        async function loadGames() {
+            try {
+                const res = await fetch('/api/games');
+                const games = await res.json();
+                const container = document.getElementById('gamesContainer');
+                container.innerHTML = '';
+
+                games.forEach(game => {
+                    const card = document.createElement('div');
+                    card.className = 'game-card';
+                    card.innerHTML = `
+                        <div class="game-thumb">${game.thumb}</div>
+                        <div class="game-details">
+                            <div class="game-title">${game.title}</div>
+                            <div class="game-creator">by ${game.creator}</div>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            } catch (err) {
+                console.error("Oyunlar yüklenirken hata:", err);
+            }
+        }
+
+        loadGames();
+    </script>
 </body>
 </html>
