@@ -1,0 +1,33 @@
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.use(express.static('public'));
+
+// Roblox İstemcisi Doğrulama Uç Noktası
+app.get('/Login/Negotiate.ashx', (req, res) => {
+    res.type('text/plain');
+    res.send('OK');
+});
+
+// Karakter Görünümü Uç Noktası
+app.get('/Asset/CharacterFetch.ashx', (req, res) => {
+    res.type('text/plain');
+    res.send('');
+});
+
+// Oyuna Katılma Betiği (Join Script)
+app.get('/game/Join.ashx', (req, res) => {
+    const luaScript = `
+        local client = game:GetService("NetworkClient")
+        local player = game:GetService("Players"):CreateLocalPlayer(0)
+        player.Name = "Owner"
+        client:Connect("127.0.0.1", 53640, 0, 20)
+    `;
+    res.type('text/plain');
+    res.send(luaScript);
+});
+
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`QweBlox sunucusu çalışıyor: Port ${PORT}`);
+});
